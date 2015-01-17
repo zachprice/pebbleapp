@@ -168,19 +168,19 @@ static void main_window_unload(Window *window) {
 
 static void cal_window_load(Window *event_list) {
   //The static time layer
-  static_time = text_layer_create(GRect(0, 115, 144, 65));
+  static_time = text_layer_create(GRect(0, 125, 144, 55));
   text_layer_set_background_color(static_time, GColorBlack);
   text_layer_set_text_color(static_time, GColorWhite);
   text_layer_set_text_alignment(static_time, GTextAlignmentCenter);
-  text_layer_set_font(static_time, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
-  text_layer_set_text(static_time, "Loading...");
+  text_layer_set_font(static_time, fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS));
+  text_layer_set_text(static_time, "00:00");
   
   
   Layer *window_layer = window_get_root_layer(event_list);
   //GRect bounds = layer_get_frame(window_layer);
 
   // Create the menu layer
-  menu_layer = menu_layer_create(GRect(0, 0, 144, 115));
+  menu_layer = menu_layer_create(GRect(0, 0, 144, 125));
   
   // Set all the callbacks for the menu layer
   menu_layer_set_callbacks(menu_layer, NULL, (MenuLayerCallbacks){
