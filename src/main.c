@@ -48,6 +48,13 @@ void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *da
 
 }
 
+static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  text_layer_set_text(times, "Select pressed!");
+}
+static void click_config_provider(void *context) {
+  // Register the ClickHandlers
+  window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
+}
 static void update_time() {
   // Get a tm structure
   time_t temp = time(NULL); 
@@ -103,6 +110,10 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(times));
   
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(dates));
+  
+  // Add click handler
+  window_set_click_config_provider(window, click_config_provider);
+
   
   // Make sure the time is displayed from the start
   update_time();
