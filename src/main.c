@@ -76,6 +76,8 @@ static void init() {
     .unload = main_window_unload
   });
 
+  window_set_fullscreen(window,true);
+
   // Show the Window on the watch, with animated=true
   window_stack_push(window, true);
   
