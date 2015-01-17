@@ -2,7 +2,7 @@
   
 static Window *window;
 static TextLayer *times;
-static TextLayer *date;
+static TextLayer *dates;
 
 static void update_time() {
   // Get a tm structure
@@ -14,7 +14,7 @@ static void update_time() {
 
   // Write the current hours and minutes into the buffer
   if(clock_is_24h_style() == true) {
-    //Use 2h hour format
+    //Use 24h hour format
     strftime(buffer, sizeof("00:00"), "%H:%M", tick_time);
   } else {
     //Use 12 hour format
@@ -26,8 +26,14 @@ static void update_time() {
 }
 
 static void update_date() {
-  text_layer_set_text(date, "Fri. 19");
+  time_t temp = time(NULL); 
+  static char buffer[] = "Loading text";
+  struct tm *tick_time = localtime(&temp);
+  strftime(buffer, sizeof(buffer), "%a.%d", tick_time);
+  text_layer_set_text(dates, buffer);
 }
+
+
 
 static void main_window_load(Window *window) {
   // Create time TextLayer
@@ -37,22 +43,22 @@ static void main_window_load(Window *window) {
   text_layer_set_text(times, "00:00");
   
   // Create date TextLayer
-  date = text_layer_create(GRect(-30, 96, 144, 50));
-  text_layer_set_background_color(date, GColorClear);
-  text_layer_set_text_color(date, GColorWhite);
-  text_layer_set_text(date, "w00t");
+  dates = text_layer_create(GRect(-30, 96, 144, 50));
+  text_layer_set_background_color(dates, GColorClear);
+  text_layer_set_text_color(dates, GColorWhite);
+  text_layer_set_text(dates, "Loading text");
 
   // Improve the layout to be more like a watchface
   text_layer_set_font(times, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(times, GTextAlignmentCenter);
 
-  text_layer_set_font(date, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-  text_layer_set_text_alignment(date, GTextAlignmentRight);
+  text_layer_set_font(dates, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_text_alignment(dates, GTextAlignmentRight);
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(times));
   
-  layer_add_child(window_get_root_layer(window), text_layer_get_layer(date));
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(dates));
   
   // Make sure the time is displayed from the start
   update_time();
@@ -64,7 +70,7 @@ static void main_window_load(Window *window) {
 static void main_window_unload(Window *window) {
   // Destroy TextLayer
   text_layer_destroy(times);
-  text_layer_destroy(date);
+  text_layer_destroy(dates);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
@@ -98,6 +104,8 @@ static void deinit() {
 
 int main(void) {
   init();
+
   app_event_loop();
   deinit();
+
 }
