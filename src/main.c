@@ -2,6 +2,7 @@
 
 #define NUM_MENU_ITEMS 5
 #define TAP_NOT_DATA true
+  
 static Window *window;
 static Window *event_list;
 static TextLayer *times;
@@ -10,20 +11,23 @@ static TextLayer *caltext;
 static MenuLayer *menu_layer;
 static TextLayer *static_time;
 
-static void tap_handler(AccelAxisType axis, int32_t direction) {
-  switch (axis) {
-  case ACCEL_AXIS_X:
-    break;
-  case ACCEL_AXIS_Y:
-    if (direction > 0)
-        if (window_is_loaded(window))
-          window_stack_push(event_list, true);
-    break;
-  case ACCEL_AXIS_Z:
-    break;
+int delta; 
+
+static void data_handler(AccelData *data, uint32_t num_samples) {
+  delta = data[0].y - data[1].y;
+  
+  // Measures change in accelerometer
+  if (delta < 0) {
+    delta *= -1; 
+  }
+  
+  // Determines if change was user-intended, and loads calendar
+  if (delta > 350) {
+    if (!window_is_loaded(event_list)) {
+      window_stack_push(event_list, true);
+    }
   }
 }
-
 
 static uint16_t menu_get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *data) {
   return NUM_MENU_ITEMS;
@@ -250,47 +254,31 @@ static void init() {
   window_set_fullscreen(event_list, true);
 
   // Show the Window on the watch, with animated=true
-  window_stack_push(event_list, true);
   window_stack_push(window, true);
   
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
   
-      // Use tap service? If not, use data service
-  if (TAP_NOT_DATA) {
-    // Subscribe to the accelerometer tap service
-    accel_tap_service_subscribe(tap_handler);
-  } else {
-    // Subscribe to the accelerometer data service
+  // Subscribe to the accelerometer data service
+  // Choose update rate
+   int num_samples = 3;
+    accel_data_service_subscribe(num_samples, data_handler);
+
     // Choose update rate
-    accel_service_set_sampling_rate(ACCEL_SAMPLING_25HZ);
-  }
-
-
-}
+    accel_service_set_sampling_rate(ACCEL_SAMPLING_10HZ);}
 
 static void deinit() {
   // Destroy Window
   window_destroy(window);
   window_destroy(event_list);
-  
-      // Use tap service? If not, use data service
-  if (TAP_NOT_DATA) {
-    // Subscribe to the accelerometer tap service
-    accel_tap_service_subscribe(tap_handler);
-  } else {
-    // Subscribe to the accelerometer data service
-    // Choose update rate
-    accel_service_set_sampling_rate(ACCEL_SAMPLING_25HZ);
-  }
-
-
+  // Subscribe to the accelerometer data service
+  // Choose update rate
+  accel_data_service_unsubscribe();
 }
 
 int main(void) {
   init();
-
   app_event_loop();
   deinit();
 
