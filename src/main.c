@@ -9,7 +9,6 @@ static TextLayer *dates;
 static TextLayer *caltext;
 static MenuLayer *menu_layer;
 static TextLayer *static_time;
-static TextLayer *static_date;
 
 static uint16_t menu_get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *data) {
   return NUM_MENU_ITEMS;
@@ -43,6 +42,7 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
 }
 
 
+
 // Here we capture when a user selects a menu item
 void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
   // Use the row to specify which item will receive the select action
@@ -55,6 +55,7 @@ void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *da
   }
 
 }
+
 
 
 // Select-button Handler 
@@ -119,14 +120,6 @@ static void update_static_time() {
   text_layer_set_text(static_time, buffer);
 }
 
-static void update_static_date() {
-  time_t temp = time(NULL); 
-  static char buffer[] = "Loading text";
-  struct tm *tick_time = localtime(&temp);
-  strftime(buffer, sizeof(buffer), "%a. %d", tick_time);
-  text_layer_set_text(static_date, buffer);
-}
-
 
 
 static void main_window_load(Window *window) {
@@ -173,27 +166,20 @@ static void main_window_unload(Window *window) {
 
 static void cal_window_load(Window *event_list) {
   //The static time layer
-  static_time = text_layer_create(GRect(0, 135, 144, 35));
+  static_time = text_layer_create(GRect(0, 115, 144, 65));
   text_layer_set_background_color(static_time, GColorBlack);
   text_layer_set_text_color(static_time, GColorWhite);
-  text_layer_set_text_alignment(static_time, GTextAlignmentRight);
-  text_layer_set_font(static_time, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_text_alignment(static_time, GTextAlignmentCenter);
+  text_layer_set_font(static_time, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text(static_time, "Loading...");
   
-  //Static date layer
-  static_date = text_layer_create(GRect(0, 135, 144, 35));
-  text_layer_set_text_color(static_date, GColorWhite);
-  text_layer_set_background_color(static_date, GColorClear);
-  text_layer_set_text_alignment(static_date, GTextAlignmentLeft);
-  text_layer_set_font(static_date, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-  text_layer_set_text(static_date, "Loading...");
   
   Layer *window_layer = window_get_root_layer(event_list);
   //GRect bounds = layer_get_frame(window_layer);
 
   // Create the menu layer
   menu_layer = menu_layer_create(GRect(0, 0, 144, 135));
-
+  
   // Set all the callbacks for the menu layer
   menu_layer_set_callbacks(menu_layer, NULL, (MenuLayerCallbacks){
     .get_num_rows = menu_get_num_rows_callback,
@@ -207,13 +193,12 @@ static void cal_window_load(Window *event_list) {
   // Add it to the window for display
   layer_add_child(window_layer, menu_layer_get_layer(menu_layer));
   layer_add_child(window_get_root_layer(event_list), text_layer_get_layer(static_time));
-  layer_add_child(window_get_root_layer(event_list), text_layer_get_layer(static_date));
   
   //Set the time correctly
   update_static_time();
   
   //Set the date
-  update_static_date();
+
 } 
 
 static void cal_window_unload(Window *calendar) {
