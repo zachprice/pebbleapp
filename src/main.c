@@ -1,7 +1,7 @@
 #include <pebble.h>
 
 #define NUM_MENU_ITEMS 5
-  
+#define TAP_NOT_DATA true
 static Window *window;
 static Window *event_list;
 static TextLayer *times;
@@ -9,6 +9,20 @@ static TextLayer *dates;
 static TextLayer *caltext;
 static MenuLayer *menu_layer;
 static TextLayer *static_time;
+
+static void tap_handler(AccelAxisType axis, int32_t direction) {
+  switch (axis) {
+  case ACCEL_AXIS_X:
+    break;
+  case ACCEL_AXIS_Y:
+    if (direction > 0)
+        if (window_is_loaded(window))
+          window_stack_push(event_list, true);
+    break;
+  case ACCEL_AXIS_Z:
+    break;
+  }
+}
 
 
 static uint16_t menu_get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *data) {
@@ -242,12 +256,36 @@ static void init() {
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  
+      // Use tap service? If not, use data service
+  if (TAP_NOT_DATA) {
+    // Subscribe to the accelerometer tap service
+    accel_tap_service_subscribe(tap_handler);
+  } else {
+    // Subscribe to the accelerometer data service
+    // Choose update rate
+    accel_service_set_sampling_rate(ACCEL_SAMPLING_25HZ);
+  }
+
+
 }
 
 static void deinit() {
   // Destroy Window
   window_destroy(window);
   window_destroy(event_list);
+  
+      // Use tap service? If not, use data service
+  if (TAP_NOT_DATA) {
+    // Subscribe to the accelerometer tap service
+    accel_tap_service_subscribe(tap_handler);
+  } else {
+    // Subscribe to the accelerometer data service
+    // Choose update rate
+    accel_service_set_sampling_rate(ACCEL_SAMPLING_25HZ);
+  }
+
+
 }
 
 int main(void) {
