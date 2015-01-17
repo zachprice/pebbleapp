@@ -10,6 +10,7 @@ static TextLayer *caltext;
 static MenuLayer *menu_layer;
 static TextLayer *static_time;
 
+
 static uint16_t menu_get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *data) {
   return NUM_MENU_ITEMS;
 }
@@ -89,6 +90,7 @@ static void update_time() {
 
   // Display this time on the TextLayer
   text_layer_set_text(times, buffer);
+
 }
 
 static void update_date() {
@@ -124,13 +126,13 @@ static void update_static_time() {
 
 static void main_window_load(Window *window) {
   // Create time TextLayer
-  times = text_layer_create(GRect(0, 55, 144, 50));
+  times = text_layer_create(GRect(0,70, 144, 100));
   text_layer_set_background_color(times, GColorClear);
   text_layer_set_text_color(times, GColorWhite);
   text_layer_set_text(times, "00:00");
   
   // Create date TextLayer
-  dates = text_layer_create(GRect(-30, 96, 144, 50));
+  dates = text_layer_create(GRect(-30, 50, 144, 50));
   text_layer_set_background_color(dates, GColorClear);
   text_layer_set_text_color(dates, GColorWhite);
   text_layer_set_text(dates, "Loading text");
@@ -178,7 +180,7 @@ static void cal_window_load(Window *event_list) {
   //GRect bounds = layer_get_frame(window_layer);
 
   // Create the menu layer
-  menu_layer = menu_layer_create(GRect(0, 0, 144, 135));
+  menu_layer = menu_layer_create(GRect(0, 0, 144, 115));
   
   // Set all the callbacks for the menu layer
   menu_layer_set_callbacks(menu_layer, NULL, (MenuLayerCallbacks){
@@ -228,6 +230,7 @@ static void init() {
     .load = cal_window_load,
     .unload = cal_window_unload
   });
+
 
   window_set_fullscreen(window, true);
   window_set_fullscreen(event_list, true);
