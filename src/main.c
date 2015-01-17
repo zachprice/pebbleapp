@@ -1,6 +1,6 @@
 #include <pebble.h>
 
-#define NUM_MENU_ITEMS 5
+#define NUM_MENU_ITEMS 3
 #define TAP_NOT_DATA true
   
 static Window *window;
@@ -24,6 +24,8 @@ static void data_handler(AccelData *data, uint32_t num_samples) {
   if (delta > 425) {
     if (!window_is_loaded(event_list)) {
       window_stack_push(event_list, true);
+    } else {
+      window_stack_pop(true);
     }
   }
 }
@@ -48,13 +50,7 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
         case 2:
           menu_cell_basic_draw(ctx, cell_layer, "Cell 3 Title", "Subtitle", NULL); 
           break;
-        case 3:
-          menu_cell_basic_draw(ctx, cell_layer, "Cell 4 Title", "Subtitle", NULL); 
-          break;
-        case 4:
-          menu_cell_basic_draw(ctx, cell_layer, "Cell 5 Title", "Subtitle", NULL); 
-          break;
-        }
+          }
       break;
     }
 }
