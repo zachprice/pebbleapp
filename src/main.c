@@ -26,7 +26,7 @@ static void update_time() {
 }
 
 static void update_date() {
-  text_layer_set_text(date, "penis");
+  text_layer_set_text(date, "Fri. 19");
 }
 
 static void main_window_load(Window *window) {
@@ -37,7 +37,7 @@ static void main_window_load(Window *window) {
   text_layer_set_text(times, "00:00");
   
   // Create date TextLayer
-  date = text_layer_create(GRect(0, 55, 144, 50));
+  date = text_layer_create(GRect(-30, 96, 144, 50));
   text_layer_set_background_color(date, GColorClear);
   text_layer_set_text_color(date, GColorWhite);
   text_layer_set_text(date, "w00t");
@@ -45,6 +45,9 @@ static void main_window_load(Window *window) {
   // Improve the layout to be more like a watchface
   text_layer_set_font(times, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(times, GTextAlignmentCenter);
+
+  text_layer_set_font(date, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_text_alignment(date, GTextAlignmentRight);
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(times));
