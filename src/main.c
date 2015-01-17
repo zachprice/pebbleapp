@@ -92,7 +92,7 @@ static void update_date() {
 
 
 
-static void main_window_load(Window *window) {
+static void main_window_load(Window *clockface) {
   // Create time TextLayer
   times = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(times, GColorClear);
@@ -151,6 +151,7 @@ static void cal_window_load(Window *calendar) {
 
 static void cal_window_unload(Window *calendar) {
   text_layer_destroy(caltext);
+  menu_layer_destroy(menu_layer);
 }
 
 static void main_window_unload(Window *window) {

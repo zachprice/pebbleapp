@@ -1,8 +1,6 @@
 {
     "appKeys": {},
-    "capabilities": [
-        ""
-    ],
+    "capabilities": [ "configurable" ],
     "companyName": "SimpleCal",
     "longName": "SimpleCal",
     "projectType": "native",
