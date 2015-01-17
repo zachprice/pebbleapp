@@ -1,10 +1,52 @@
 #include <pebble.h>
-  
+
+#define NUM_MENU_ITEMS 3
+
 static Window *window;
 static Window *calendar;
 static TextLayer *times;
 static TextLayer *dates;
 static TextLayer *caltext;
+static MenuLayer *menu_layer;
+
+static uint16_t menu_get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *data) {
+  return NUM_MENU_ITEMS;
+}
+
+static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuIndex *cell_index, void *data) {
+  // Determine which section we're going to draw in
+    switch (cell_index->section) {
+    case 0:
+      // Use the row to specify which item we'll draw
+        switch (cell_index->row) {
+        case 0:
+          // Use to show data in each cell
+          menu_cell_basic_draw(ctx, cell_layer, "Cell 1 Title", "Subtitle", NULL);
+          break;
+        case 1:
+          menu_cell_basic_draw(ctx, cell_layer, "Cell 2 Title", "Subtitle", NULL); 
+          break;
+        case 2:
+          menu_cell_basic_draw(ctx, cell_layer, "Cell 3 Title", "Subtitle", NULL); 
+          break;
+        }
+      break;
+    }
+}
+
+
+// Here we capture when a user selects a menu item
+void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
+  // Use the row to specify which item will receive the select action
+  switch (cell_index->row) {
+    // This is the menu item with the cycling icon
+    case 1:
+      // After changing the icon, mark the layer to have it updated
+      layer_mark_dirty(menu_layer_get_layer(menu_layer));
+      break;
+  }
+
+}
 
 static void update_time() {
   // Get a tm structure
@@ -70,13 +112,25 @@ static void main_window_load(Window *window) {
 }
 
 static void cal_window_load(Window *calendar) {
-  caltext = text_layer_create(GRect(0, 0, 144, 144));
-  text_layer_set_background_color(caltext, GColorClear);
-  text_layer_set_text_color(caltext, GColorBlack);
-  text_layer_set_font(caltext, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-  text_layer_set_text(caltext, "Cliche lo-fi deep v, semiotics Williamsburg gastropub meggings farm-to-table. Bitters Williamsburg forage, chillwave Pinterest cornhole tilde chia migas yr irony PBR meditation. Cornhole mumblecore flannel, pour-over Pinterest wayfarers blog forage swag Helvetica DIY beard. Occupy vinyl leggings, flannel +1 VHS Helvetica chambray deep v cronut. Readymade yr pork belly, trust fund ennui polaroid raw denim. Brunch Schlitz Portland fingerstache, Williamsburg disrupt gentrify PBR&B mumblecore pork belly four dollar toast. Pinterest salvia raw denim 3 wolf moon pour-over, mustache direct trade American Apparel fap slow-carb hoodie.");
-  layer_add_child(window_get_root_layer(calendar), text_layer_get_layer(caltext));
-}
+  Layer *window_layer = window_get_root_layer(calendar);
+  GRect bounds = layer_get_frame(window_layer);
+
+  // Create the menu layer
+  menu_layer = menu_layer_create(bounds);
+
+  // Set all the callbacks for the menu layer
+  menu_layer_set_callbacks(menu_layer, NULL, (MenuLayerCallbacks){
+    .get_num_rows = menu_get_num_rows_callback,
+    .draw_row = menu_draw_row_callback,
+    .select_click = menu_select_callback,
+  });
+
+  // Bind the menu layer's click config provider to the window for interactivity
+  menu_layer_set_click_config_onto_window(menu_layer, calendar);
+
+  // Add it to the window for display
+  layer_add_child(window_layer, menu_layer_get_layer(menu_layer));
+} 
 
 static void cal_window_unload(Window *calendar) {
   text_layer_destroy(caltext);
