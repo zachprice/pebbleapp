@@ -2,7 +2,7 @@
 
 #define NUM_MENU_ITEMS 3
 
-static Window *window;
+static Window *clockface;
 static Window *calendar;
 static TextLayer *times;
 static TextLayer *dates;
@@ -48,9 +48,15 @@ void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *da
 
 }
 
+
+// Select-button Handler 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(times, "Select pressed!");
+  if (window_is_loaded(clockface)) {
+    window_stack_push(calendar, true);
+  }
 }
+
+      
 static void click_config_provider(void *context) {
   // Register the ClickHandlers
   window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
@@ -107,12 +113,12 @@ static void main_window_load(Window *window) {
   text_layer_set_text_alignment(dates, GTextAlignmentRight);
 
   // Add it as a child layer to the Window's root layer
-  layer_add_child(window_get_root_layer(window), text_layer_get_layer(times));
+  layer_add_child(window_get_root_layer(clockface), text_layer_get_layer(times));
   
-  layer_add_child(window_get_root_layer(window), text_layer_get_layer(dates));
+  layer_add_child(window_get_root_layer(clockface), text_layer_get_layer(dates));
   
   // Add click handler
-  window_set_click_config_provider(window, click_config_provider);
+  window_set_click_config_provider(clockface, click_config_provider);
 
   
   // Make sure the time is displayed from the start
@@ -159,13 +165,13 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   
 static void init() {
   // Create main Window element and assign to pointer
-  window = window_create();
-  window_set_background_color(window,GColorBlack);
+  clockface = window_create();
+  window_set_background_color(clockface,GColorBlack);
 
   calendar = window_create();
 
   // Set handlers to manage the elements inside the Window
-  window_set_window_handlers(window, (WindowHandlers) {
+  window_set_window_handlers(clockface, (WindowHandlers) {
     .load = main_window_load,
     .unload = main_window_unload
   });
@@ -175,11 +181,11 @@ static void init() {
     .unload = cal_window_unload
   });
 
-  window_set_fullscreen(window,true);
+  window_set_fullscreen(clockface,true);
   window_set_fullscreen(calendar,true);
 
   // Show the Window on the watch, with animated=true
-  window_stack_push(window, true);
+  window_stack_push(clockface, true);
   window_stack_push(calendar, true);
   
   // Register with TickTimerService
@@ -188,7 +194,7 @@ static void init() {
 
 static void deinit() {
   // Destroy Window
-  window_destroy(window);
+  window_destroy(clockface);
   window_destroy(calendar);
 }
 
