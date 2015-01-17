@@ -186,8 +186,9 @@ static void init() {
   window_set_fullscreen(calendar,true);
 
   // Show the Window on the watch, with animated=true
-  window_stack_push(clockface, true);
   window_stack_push(calendar, true);
+  window_stack_push(clockface, true);
+  
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
