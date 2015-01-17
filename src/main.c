@@ -21,7 +21,7 @@ static void data_handler(AccelData *data, uint32_t num_samples) {
   }
 
   // Determines if change was user-intended, and loads calendar
-  if (delta > 425) {
+  if (delta > 400) {
     if (!window_is_loaded(event_list)) {
       window_stack_push(event_list, true);
     } else {
