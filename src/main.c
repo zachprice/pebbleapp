@@ -186,7 +186,7 @@ static void cal_window_load(Window *event_list) {
   text_layer_set_background_color(static_time, GColorBlack);
   text_layer_set_text_color(static_time, GColorWhite);
   text_layer_set_text_alignment(static_time, GTextAlignmentCenter);
-  text_layer_set_font(static_time, fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS));
+  text_layer_set_font(static_time, fonts_get_system_font(FONT_KEY_GOTHIC_28));
   text_layer_set_text(static_time, "00:00");
   
   
