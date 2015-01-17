@@ -3,13 +3,13 @@
     "capabilities": [
         ""
     ],
-    "companyName": "zprice118@gmail.com",
-    "longName": "Tutorial",
+    "companyName": "SimpleCal",
+    "longName": "SimpleCal",
     "projectType": "native",
     "resources": {
         "media": []
     },
-    "shortName": "Tutorial",
+    "shortName": "SimpleCal",
     "uuid": "13ddc986-8fac-4c45-b2d7-12f184146c0b",
     "versionCode": 1,
     "versionLabel": "1.0",

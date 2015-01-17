@@ -695,7 +695,7 @@ LOAD /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/a
  .pbl_header    0x0000000000000000       0x82 appinfo.auto.c.7.o
                 0x0000000000000000                __pbl_app_info
 
-.text           0x0000000000000084      0x3bb
+.text           0x0000000000000084      0x726
  *(.text)
  .text          0x0000000000000084       0x14 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
  *(.text.*)
@@ -703,132 +703,138 @@ LOAD /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/a
                 0x0000000000000098       0x60 src/main.c.7.o
  .text.tick_handler
                 0x00000000000000f8        0x4 src/main.c.7.o
+ .text.cal_window_unload
+                0x00000000000000fc       0x10 src/main.c.7.o
  .text.main_window_unload
-                0x00000000000000fc       0x24 src/main.c.7.o
+                0x000000000000010c       0x24 src/main.c.7.o
+ .text.cal_window_load
+                0x0000000000000130       0x78 src/main.c.7.o
  .text.main_window_load
-                0x0000000000000120      0x124 src/main.c.7.o
+                0x00000000000001a8      0x128 src/main.c.7.o
  .text.startup.main
-                0x0000000000000244       0x74 src/main.c.7.o
-                0x0000000000000244                main
+                0x00000000000002d0       0xd0 src/main.c.7.o
+                0x00000000000002d0                main
  .text.app_event_loop
-                0x00000000000002b8        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000002b8                app_event_loop
+                0x00000000000003a0        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000003a0                app_event_loop
  .text.clock_is_24h_style
-                0x00000000000002c4        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000002c4                clock_is_24h_style
+                0x00000000000003ac        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000003ac                clock_is_24h_style
  .text.fonts_get_system_font
-                0x00000000000002d0        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000002d0                fonts_get_system_font
+                0x00000000000003b8        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000003b8                fonts_get_system_font
  .text.layer_add_child
-                0x00000000000002dc        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000002dc                layer_add_child
+                0x00000000000003c4        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000003c4                layer_add_child
  .text.localtime
-                0x00000000000002e8        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000002e8                localtime
- .text.memset   0x00000000000002f4        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000002f4                memset
+                0x00000000000003d0        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000003d0                localtime
+ .text.memset   0x00000000000003dc        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000003dc                memset
  .text.strftime
-                0x0000000000000300        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000300                strftime
+                0x00000000000003e8        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000003e8                strftime
  .text.text_layer_create
-                0x000000000000030c        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x000000000000030c                text_layer_create
+                0x00000000000003f4        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000003f4                text_layer_create
  .text.text_layer_destroy
-                0x0000000000000318        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000318                text_layer_destroy
+                0x0000000000000400        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000400                text_layer_destroy
  .text.text_layer_get_layer
-                0x0000000000000324        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000324                text_layer_get_layer
+                0x000000000000040c        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x000000000000040c                text_layer_get_layer
  .text.text_layer_set_background_color
-                0x0000000000000330        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000330                text_layer_set_background_color
+                0x0000000000000418        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000418                text_layer_set_background_color
  .text.text_layer_set_font
-                0x000000000000033c        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x000000000000033c                text_layer_set_font
+                0x0000000000000424        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000424                text_layer_set_font
  .text.text_layer_set_text
-                0x0000000000000348        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000348                text_layer_set_text
+                0x0000000000000430        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000430                text_layer_set_text
  .text.text_layer_set_text_alignment
-                0x0000000000000354        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000354                text_layer_set_text_alignment
+                0x000000000000043c        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x000000000000043c                text_layer_set_text_alignment
  .text.text_layer_set_text_color
-                0x0000000000000360        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000360                text_layer_set_text_color
+                0x0000000000000448        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000448                text_layer_set_text_color
  .text.tick_timer_service_subscribe
-                0x000000000000036c        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x000000000000036c                tick_timer_service_subscribe
- .text.time     0x0000000000000378        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000378                time
+                0x0000000000000454        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000454                tick_timer_service_subscribe
+ .text.time     0x0000000000000460        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000460                time
  .text.window_create
-                0x0000000000000384        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000384                window_create
+                0x000000000000046c        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x000000000000046c                window_create
  .text.window_destroy
-                0x0000000000000390        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x0000000000000390                window_destroy
+                0x0000000000000478        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000478                window_destroy
  .text.window_get_root_layer
-                0x000000000000039c        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x000000000000039c                window_get_root_layer
+                0x0000000000000484        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000484                window_get_root_layer
  .text.window_set_background_color
-                0x00000000000003a8        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000003a8                window_set_background_color
+                0x0000000000000490        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x0000000000000490                window_set_background_color
  .text.window_set_fullscreen
-                0x00000000000003b4        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000003b4                window_set_fullscreen
+                0x000000000000049c        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x000000000000049c                window_set_fullscreen
  .text.window_set_window_handlers
-                0x00000000000003c0        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000003c0                window_set_window_handlers
+                0x00000000000004a8        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000004a8                window_set_window_handlers
  .text.window_stack_push
-                0x00000000000003cc        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
-                0x00000000000003cc                window_stack_push
+                0x00000000000004b4        0xc /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+                0x00000000000004b4                window_stack_push
  *(.rodata)
- .rodata        0x00000000000003d8       0x10 src/main.c.7.o
+ .rodata        0x00000000000004c0       0x18 src/main.c.7.o
  *(.rodata*)
  .rodata.str1.1
-                0x00000000000003e8       0x57 src/main.c.7.o
+                0x00000000000004d8      0x2d2 src/main.c.7.o
 
-.glue_7         0x0000000000000440        0x0
+.glue_7         0x00000000000007ac        0x0
  .glue_7        0x0000000000000000        0x0 linker stubs
 
-.glue_7t        0x0000000000000440        0x0
+.glue_7t        0x00000000000007ac        0x0
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000000440        0x0
+.vfp11_veneer   0x00000000000007ac        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x0000000000000440        0x0
+.v4_bx          0x00000000000007ac        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
-.iplt           0x0000000000000440        0x0
+.iplt           0x00000000000007ac        0x0
  .iplt          0x0000000000000000        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.rel.dyn        0x0000000000000440        0x0
+.rel.dyn        0x00000000000007ac        0x0
  .rel.iplt      0x0000000000000000        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.data           0x0000000000000440       0x17
+.data           0x00000000000007ac       0x17
  *(.data)
- .data          0x0000000000000440        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crti.o
- .data          0x0000000000000440        0x4 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
-                0x0000000000000440                __dso_handle
- .data          0x0000000000000444        0x0 src/main.c.7.o
- .data          0x0000000000000444        0x0 appinfo.auto.c.7.o
- .data          0x0000000000000444        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
- .data          0x0000000000000444        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
- .data          0x0000000000000444        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtn.o
+ .data          0x00000000000007ac        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crti.o
+ .data          0x00000000000007ac        0x4 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
+                0x00000000000007ac                __dso_handle
+ .data          0x00000000000007b0        0x0 src/main.c.7.o
+ .data          0x00000000000007b0        0x0 appinfo.auto.c.7.o
+ .data          0x00000000000007b0        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
+ .data          0x00000000000007b0        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
+ .data          0x00000000000007b0        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtn.o
  *(.data.*)
- .data.buffer.6660
-                0x0000000000000444        0xd src/main.c.7.o
- .data.buffer.6656
-                0x0000000000000451        0x6 src/main.c.7.o
+ .data.buffer.6662
+                0x00000000000007b0        0xd src/main.c.7.o
+ .data.buffer.6658
+                0x00000000000007bd        0x6 src/main.c.7.o
 
-.igot.plt       0x0000000000000458        0x0
+.igot.plt       0x00000000000007c4        0x0
  .igot.plt      0x0000000000000000        0x0 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.bss            0x0000000000000458        0xc
+.bss            0x00000000000007c4       0x14
  *(.bss)
  *(.bss.*)
- .bss.dates     0x0000000000000458        0x4 src/main.c.7.o
- .bss.times     0x000000000000045c        0x4 src/main.c.7.o
- .bss.window    0x0000000000000460        0x4 src/main.c.7.o
+ .bss.caltext   0x00000000000007c4        0x4 src/main.c.7.o
+ .bss.calendar  0x00000000000007c8        0x4 src/main.c.7.o
+ .bss.dates     0x00000000000007cc        0x4 src/main.c.7.o
+ .bss.times     0x00000000000007d0        0x4 src/main.c.7.o
+ .bss.window    0x00000000000007d4        0x4 src/main.c.7.o
 
 DISCARD
  libc.a(*)
@@ -861,35 +867,35 @@ OUTPUT(/Users/shanedewael/Development/pebbleapp/build/pebble-app.elf elf32-littl
  .comment       0x0000000000000000       0x4f appinfo.auto.c.7.o
  .comment       0x0000000000000000       0x4f /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
 
-.debug_info     0x0000000000000000      0xd6e
- .debug_info    0x0000000000000000      0xa6c src/main.c.7.o
- .debug_info    0x0000000000000a6c      0x302 appinfo.auto.c.7.o
+.debug_info     0x0000000000000000      0xedb
+ .debug_info    0x0000000000000000      0xbd9 src/main.c.7.o
+ .debug_info    0x0000000000000bd9      0x302 appinfo.auto.c.7.o
 
-.debug_abbrev   0x0000000000000000      0x32b
- .debug_abbrev  0x0000000000000000      0x28d src/main.c.7.o
- .debug_abbrev  0x000000000000028d       0x9e appinfo.auto.c.7.o
+.debug_abbrev   0x0000000000000000      0x339
+ .debug_abbrev  0x0000000000000000      0x29b src/main.c.7.o
+ .debug_abbrev  0x000000000000029b       0x9e appinfo.auto.c.7.o
 
-.debug_loc      0x0000000000000000      0x155
- .debug_loc     0x0000000000000000      0x155 src/main.c.7.o
+.debug_loc      0x0000000000000000      0x1c3
+ .debug_loc     0x0000000000000000      0x1c3 src/main.c.7.o
 
-.debug_aranges  0x0000000000000000       0x58
+.debug_aranges  0x0000000000000000       0x68
  .debug_aranges
-                0x0000000000000000       0x40 src/main.c.7.o
+                0x0000000000000000       0x50 src/main.c.7.o
  .debug_aranges
-                0x0000000000000040       0x18 appinfo.auto.c.7.o
+                0x0000000000000050       0x18 appinfo.auto.c.7.o
 
-.debug_ranges   0x0000000000000000       0x30
- .debug_ranges  0x0000000000000000       0x30 src/main.c.7.o
+.debug_ranges   0x0000000000000000       0x40
+ .debug_ranges  0x0000000000000000       0x40 src/main.c.7.o
 
-.debug_line     0x0000000000000000      0x3cb
- .debug_line    0x0000000000000000      0x29f src/main.c.7.o
- .debug_line    0x000000000000029f      0x12c appinfo.auto.c.7.o
+.debug_line     0x0000000000000000      0x404
+ .debug_line    0x0000000000000000      0x2d8 src/main.c.7.o
+ .debug_line    0x00000000000002d8      0x12c appinfo.auto.c.7.o
 
-.debug_str      0x0000000000000000      0x62c
- .debug_str     0x0000000000000000      0x48b src/main.c.7.o
-                                        0x4f4 (size before relaxing)
- .debug_str     0x000000000000048b      0x1a1 appinfo.auto.c.7.o
+.debug_str      0x0000000000000000      0x65f
+ .debug_str     0x0000000000000000      0x4be src/main.c.7.o
+                                        0x527 (size before relaxing)
+ .debug_str     0x00000000000004be      0x1a1 appinfo.auto.c.7.o
                                         0x274 (size before relaxing)
 
-.debug_frame    0x0000000000000000       0x94
- .debug_frame   0x0000000000000000       0x94 src/main.c.7.o
+.debug_frame    0x0000000000000000       0xc8
+ .debug_frame   0x0000000000000000       0xc8 src/main.c.7.o
