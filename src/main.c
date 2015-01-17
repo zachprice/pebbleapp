@@ -14,15 +14,14 @@ static TextLayer *static_time;
 int delta; 
 
 static void data_handler(AccelData *data, uint32_t num_samples) {
-  delta = data[0].y - data[1].y;
-  
   // Measures change in accelerometer
+  delta = data[0].y - data[1].y;
   if (delta < 0) {
     delta *= -1; 
   }
-  
+
   // Determines if change was user-intended, and loads calendar
-  if (delta > 350) {
+  if (delta > 425) {
     if (!window_is_loaded(event_list)) {
       window_stack_push(event_list, true);
     }
@@ -79,6 +78,7 @@ void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *da
 
 // Select-button Handler 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  // Loads event list on button click
   if (window_is_loaded(window)) {
     window_stack_push(event_list, true);
   }
