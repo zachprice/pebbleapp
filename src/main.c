@@ -33,13 +33,13 @@ static void main_window_load(Window *window) {
   // Create time TextLayer
   times = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(times, GColorClear);
-  text_layer_set_text_color(times, GColorBlack);
+  text_layer_set_text_color(times, GColorWhite);
   text_layer_set_text(times, "00:00");
   
   // Create date TextLayer
   date = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(date, GColorClear);
-  text_layer_set_text_color(date, GColorBlack);
+  text_layer_set_text_color(date, GColorWhite);
   text_layer_set_text(date, "00:00");
 
   // Improve the layout to be more like a watchface
@@ -69,6 +69,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 static void init() {
   // Create main Window element and assign to pointer
   window = window_create();
+  window_set_background_color(window,GColorBlack);
 
   // Set handlers to manage the elements inside the Window
   window_set_window_handlers(window, (WindowHandlers) {
