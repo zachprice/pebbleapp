@@ -1,13 +1,15 @@
 #include <pebble.h>
 
-#define NUM_MENU_ITEMS 3
-
-static Window *clockface;
-static Window *calendar;
+#define NUM_MENU_ITEMS 5
+  
+static Window *window;
+static Window *event_list;
 static TextLayer *times;
 static TextLayer *dates;
 static TextLayer *caltext;
 static MenuLayer *menu_layer;
+static TextLayer *static_time;
+static TextLayer *static_date;
 
 static uint16_t menu_get_num_rows_callback(MenuLayer *menu_layer, uint16_t section_index, void *data) {
   return NUM_MENU_ITEMS;
@@ -28,6 +30,12 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
           break;
         case 2:
           menu_cell_basic_draw(ctx, cell_layer, "Cell 3 Title", "Subtitle", NULL); 
+          break;
+        case 3:
+          menu_cell_basic_draw(ctx, cell_layer, "Cell 4 Title", "Subtitle", NULL); 
+          break;
+        case 4:
+          menu_cell_basic_draw(ctx, cell_layer, "Cell 5 Title", "Subtitle", NULL); 
           break;
         }
       break;
@@ -51,8 +59,8 @@ void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *da
 
 // Select-button Handler 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  if (window_is_loaded(clockface)) {
-    window_stack_push(calendar, true);
+  if (window_is_loaded(window)) {
+    window_stack_push(event_list, true);
   }
 }
 
@@ -90,9 +98,38 @@ static void update_date() {
   text_layer_set_text(dates, buffer);
 }
 
+static void update_static_time() {
+  // Get a tm structure
+  time_t temp = time(NULL); 
+  struct tm *tick_time = localtime(&temp);
+
+  // Create a long-lived buffer
+  static char buffer[] = "00:00";
+
+  // Write the current hours and minutes into the buffer
+  if(clock_is_24h_style() == true) {
+    //Use 24h hour format
+    strftime(buffer, sizeof("00:00"), "%H:%M", tick_time);
+  } else {
+    //Use 12 hour format
+    strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
+  }
+
+  // Display this time on the TextLayer
+  text_layer_set_text(static_time, buffer);
+}
+
+static void update_static_date() {
+  time_t temp = time(NULL); 
+  static char buffer[] = "Loading text";
+  struct tm *tick_time = localtime(&temp);
+  strftime(buffer, sizeof(buffer), "%a. %d", tick_time);
+  text_layer_set_text(static_date, buffer);
+}
 
 
-static void main_window_load(Window *clockface) {
+
+static void main_window_load(Window *window) {
   // Create time TextLayer
   times = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(times, GColorClear);
@@ -113,12 +150,12 @@ static void main_window_load(Window *clockface) {
   text_layer_set_text_alignment(dates, GTextAlignmentRight);
 
   // Add it as a child layer to the Window's root layer
-  layer_add_child(window_get_root_layer(clockface), text_layer_get_layer(times));
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(times));
   
-  layer_add_child(window_get_root_layer(clockface), text_layer_get_layer(dates));
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(dates));
   
   // Add click handler
-  window_set_click_config_provider(clockface, click_config_provider);
+  window_set_click_config_provider(window, click_config_provider);
 
   
   // Make sure the time is displayed from the start
@@ -128,12 +165,34 @@ static void main_window_load(Window *clockface) {
   update_date();
 }
 
-static void cal_window_load(Window *calendar) {
-  Layer *window_layer = window_get_root_layer(calendar);
-  GRect bounds = layer_get_frame(window_layer);
+static void main_window_unload(Window *window) {
+  // Destroy TextLayer
+  text_layer_destroy(times);
+  text_layer_destroy(dates);
+}
+
+static void cal_window_load(Window *event_list) {
+  //The static time layer
+  static_time = text_layer_create(GRect(0, 135, 144, 35));
+  text_layer_set_background_color(static_time, GColorBlack);
+  text_layer_set_text_color(static_time, GColorWhite);
+  text_layer_set_text_alignment(static_time, GTextAlignmentRight);
+  text_layer_set_font(static_time, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_text(static_time, "Loading...");
+  
+  //Static date layer
+  static_date = text_layer_create(GRect(0, 135, 144, 35));
+  text_layer_set_text_color(static_date, GColorWhite);
+  text_layer_set_background_color(static_date, GColorClear);
+  text_layer_set_text_alignment(static_date, GTextAlignmentLeft);
+  text_layer_set_font(static_date, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_text(static_date, "Loading...");
+  
+  Layer *window_layer = window_get_root_layer(event_list);
+  //GRect bounds = layer_get_frame(window_layer);
 
   // Create the menu layer
-  menu_layer = menu_layer_create(bounds);
+  menu_layer = menu_layer_create(GRect(0, 0, 144, 135));
 
   // Set all the callbacks for the menu layer
   menu_layer_set_callbacks(menu_layer, NULL, (MenuLayerCallbacks){
@@ -143,10 +202,18 @@ static void cal_window_load(Window *calendar) {
   });
 
   // Bind the menu layer's click config provider to the window for interactivity
-  menu_layer_set_click_config_onto_window(menu_layer, calendar);
+  menu_layer_set_click_config_onto_window(menu_layer, event_list);
 
   // Add it to the window for display
   layer_add_child(window_layer, menu_layer_get_layer(menu_layer));
+  layer_add_child(window_get_root_layer(event_list), text_layer_get_layer(static_time));
+  layer_add_child(window_get_root_layer(event_list), text_layer_get_layer(static_date));
+  
+  //Set the time correctly
+  update_static_time();
+  
+  //Set the date
+  update_static_date();
 } 
 
 static void cal_window_unload(Window *calendar) {
@@ -154,11 +221,6 @@ static void cal_window_unload(Window *calendar) {
   menu_layer_destroy(menu_layer);
 }
 
-static void main_window_unload(Window *window) {
-  // Destroy TextLayer
-  text_layer_destroy(times);
-  text_layer_destroy(dates);
-}
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   update_time();
@@ -166,28 +228,28 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   
 static void init() {
   // Create main Window element and assign to pointer
-  clockface = window_create();
-  window_set_background_color(clockface,GColorBlack);
+  window = window_create();
+  window_set_background_color(window, GColorBlack);
 
-  calendar = window_create();
+  event_list = window_create();
 
   // Set handlers to manage the elements inside the Window
-  window_set_window_handlers(clockface, (WindowHandlers) {
+  window_set_window_handlers(window, (WindowHandlers) {
     .load = main_window_load,
     .unload = main_window_unload
   });
 
-  window_set_window_handlers(calendar, (WindowHandlers) {
+  window_set_window_handlers(event_list, (WindowHandlers) {
     .load = cal_window_load,
     .unload = cal_window_unload
   });
 
-  window_set_fullscreen(clockface,true);
-  window_set_fullscreen(calendar,true);
+  window_set_fullscreen(window, true);
+  window_set_fullscreen(event_list, true);
 
   // Show the Window on the watch, with animated=true
-  window_stack_push(calendar, true);
-  window_stack_push(clockface, true);
+  window_stack_push(event_list, true);
+  window_stack_push(window, true);
   
   
   // Register with TickTimerService
@@ -196,8 +258,8 @@ static void init() {
 
 static void deinit() {
   // Destroy Window
-  window_destroy(clockface);
-  window_destroy(calendar);
+  window_destroy(window);
+  window_destroy(event_list);
 }
 
 int main(void) {
