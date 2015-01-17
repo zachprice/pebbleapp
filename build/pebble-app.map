@@ -695,7 +695,7 @@ LOAD /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/a
  .pbl_header    0x0000000000000000       0x82 appinfo.auto.c.7.o
                 0x0000000000000000                __pbl_app_info
 
-.text           0x0000000000000084      0x3ba
+.text           0x0000000000000084      0x3bb
  *(.text)
  .text          0x0000000000000084       0x14 /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/Pebble/lib/libpebble.a(tmpL9Cjnwpebble.o)
  *(.text.*)
@@ -784,7 +784,7 @@ LOAD /Users/shanedewael/pebble-dev/PebbleSDK-2.8.1/arm-cs-tools/bin/../lib/gcc/a
  .rodata        0x00000000000003d8       0x10 src/main.c.7.o
  *(.rodata*)
  .rodata.str1.1
-                0x00000000000003e8       0x56 src/main.c.7.o
+                0x00000000000003e8       0x57 src/main.c.7.o
 
 .glue_7         0x0000000000000440        0x0
  .glue_7        0x0000000000000000        0x0 linker stubs

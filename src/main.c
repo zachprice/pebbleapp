@@ -29,7 +29,7 @@ static void update_date() {
   time_t temp = time(NULL); 
   static char buffer[] = "Loading text";
   struct tm *tick_time = localtime(&temp);
-  strftime(buffer, sizeof(buffer), "%a.%d", tick_time);
+  strftime(buffer, sizeof(buffer), "%a. %d", tick_time);
   text_layer_set_text(dates, buffer);
 }
 
