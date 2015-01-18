@@ -1,17 +1,19 @@
 {
     "appKeys": {},
-    "capabilities": [ "configurable" ],
-    "companyName": "SimpleCal",
-    "longName": "SimpleCal",
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "Zach Price",
+    "longName": "Basic Weather Clock",
     "projectType": "native",
     "resources": {
         "media": []
     },
-    "shortName": "SimpleCal",
+    "shortName": "Weather Clock",
     "uuid": "13ddc986-8fac-4c45-b2d7-12f184146c0b",
     "versionCode": 1,
     "versionLabel": "1.0",
     "watchapp": {
-        "watchface": false
+        "watchface": true
     }
 }
